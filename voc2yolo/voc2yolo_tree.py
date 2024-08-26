@@ -78,7 +78,7 @@ def voc2yolo(rootpath, xmlname, classes):
     '''
 
     base_path, basename = os.path.split(xmlname)
-    dst_path = base_path.replace('annotion', 'labels')
+    dst_path = base_path.replace('annotation', 'labels')
     #dst_path = base_path.replace('tmp_val', 'tmp_labels_val')
     if not os.path.exists(dst_path):
         os.makedirs(dst_path)
@@ -104,7 +104,8 @@ def voc2yolo(rootpath, xmlname, classes):
                 if cls not in classes and not cls in classes_new:
                     continue
                 if cls in classes_new:
-                    cls_id = classes.index('person')
+                    # cls_id = classes.index('person')
+                    cls_id = classes_new.index(cls)
                     # print("person_model", classes.index('person'))
                 else:
                     cls_id = classes.index(cls)
@@ -146,40 +147,18 @@ def read_xml_list(file):
 
 if __name__ == "__main__":
     # classes = ['person', 'escalator', 'person_model', 'person_dummy', 'fake_escalator']
-    # rootPath = "D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/data_filter/batch2&batch3_Lit/"
-    # rootPath = "D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/data_filter/902_domain/"
-    # rootPath = "D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/902_model/i18Rperson_model_dummy/"
-    # rootPath = "D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/902_20210705/record_3/"
-    # rootPath = "D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/openData/all_usc_data/"
-    # rootPath = "D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/openData/all_iccv_data/"
-
     # classes = ['escalator', 'escalator_handrails']
     # classes = ['person', 'escalator', 'escalator_handrails', 'person_dummy', 'escalator_model', 'escalator_handrails_model', 'difficult']
+    # classes = ['dirtyliquid','semisolid']
     classes = ['dirtyliquid']
+    # classes = ['dirtydry']
     # classes = ['person', 'escalator_handrails', 'person_dummy', 'escalator_model', 'escalator_handrails_model']
     classes_new = ['person_model']
-
-    # rootPath = "D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/escalator_20210716/"
-    # rootPath = 'D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/escalator_new_standard/escalator_20210721/7.21/all/'
-    # rootPath = 'D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/902_0712/all/xmls/train/'
-    # rootPath = 'D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/902_20210705_i18R/dataset/plan2/'
-    # rootPath = 'D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/selfCollection/collection/'
-    # rootPath = 'D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/902_new_rules/escalator_cover/902/collection'
-    # rootPath = 'D:/00_indemind_lyk/ICE_I26R_I18R/ICEDataSets/902_bug_20210826/collection'
-    # filePath = os.path.join(rootPath, "xml")
-    # xml_list = read_xml_list('D:/00_indemind_lyk/tinyDataSet/tiny_rgb_data/new_list.txt')
+    # classes_new = ['solid']
 
     rootPath = '/media/xin/data1/data/dirty_data/ALL/voc'
-    # xml_list = read_xml_list('D:/00_indemind_lyk/tinyDataSet/5000PLUS/data/xml_list.txt')
-    # xml_list = read_xml_list('D:/00_indemind_lyk/tinyDataSet/shunyi_test_1w2/anno/test.txt')
-    # xml_list = read_xml_list('E:/dataset/ANNOTATION/TEST/ICE.txt')
-    # xml_list = read_xml_list('E:/dataset/ANNOTATION/TEST/ICE2000.txt')
-    # xml_list = read_xml_list('D:/00_indemind_lyk/DATASET_INDEM/ANNOTATIONS/V104_nococo_notest.txt')
-    xml_list = read_xml_list('/media/xin/data1/data/dirty_data/ALL/labels.txt')
-
-
-
-
+    xml_list = read_xml_list('/media/xin/data/data/dirty_data/ALL/labels.txt')
+    # xml_list = read_xml_list('/media/xin/data/data/dirty_data/ALL_semisolid/labels.txt')
 
     # files = os.listdir(filePath)
     for file in tqdm(xml_list):

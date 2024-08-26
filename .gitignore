@@ -18,3 +18,5 @@ __pycache__
 *.pyd
 .idea
 *.db
+log.txt
+video_image_conversion/screen-20240417-144619/
